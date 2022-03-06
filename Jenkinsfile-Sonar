@@ -11,7 +11,7 @@ node{
     
     stage("SonarQubeReport")
     {
-        withSonarQubeEnv(credentialsId: 'ea776d04-3b89-4148-a42d-8643697f902d') {
+        withSonarQubeEnv(credentialsId: '72368cb1-a59e-4cb5-8666-e1982713bfe5') {
              sh 'mvn sonar:sonar'
       }
     }
@@ -32,9 +32,9 @@ node{
         nexusArtifactUploader artifacts: [[artifactId: '$BUILD_TIMESTAMP', classifier: '', file: 'target/vprofile-v1.war', type: 'war']], credentialsId: '5e9c9e1e-e0c9-462f-b20a-1eed731c752c', groupId: 'Dev', nexusUrl: '172.31.2.189:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'vprofile-repo', version: '$BUILD_ID'
     }
     stage("TomcatDeploy-QA"){
-        deploy adapters: [tomcat8(credentialsId: '6a509123-b706-425e-8eac-c1cb9714c189', path: '', url: 'http://172.31.12.96:8080')], contextPath: null, war: '**/*.war'   
+        deploy adapters: [tomcat8(credentialsId: '64fe9b87-b934-4f46-bfdb-e1f6e51c9c5a', path: '', url: 'http://44.202.44.125:8080/')], contextPath: null, war: '**/*.war' 
     }
     stage("TomcatDeploy-PROD"){
-        deploy adapters: [tomcat8(credentialsId: '6a509123-b706-425e-8eac-c1cb9714c189', path: '', url: 'http://172.31.7.126:8080')], contextPath: null, war: '**/*.war'   
+        deploy adapters: [tomcat8(credentialsId: '64fe9b87-b934-4f46-bfdb-e1f6e51c9c5a', path: '', url: 'http://54.86.118.1:8080/')], contextPath: null, war: '**/*.war'  
     }
 }
